@@ -2,8 +2,7 @@
 #include<stdlib.h>
 //#include<conio.h>
 #include<string.h>
-#include<lab1.h>
-
+#include "lab1.h"
 // Функция для вычисления минимума из трех чисел
 int min(int a, int b, int c) {
     if (a < b) return (a < c) ? a : c;
@@ -44,8 +43,7 @@ int d(const char *x, const char *y) {
     return result;
 }
 
-
-int main(){
+/*int main(){
     char x[1000];
     char y[1000];
     printf("Enter x: ");
@@ -58,4 +56,6 @@ int main(){
 
     printf("Number of conversion %s -> %s : %d", x, y, d(x,y));
     return 0;
+}
+*/
 }
