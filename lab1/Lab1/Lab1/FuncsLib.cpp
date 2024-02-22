@@ -1,5 +1,17 @@
 #include "Header.h"
 
+//void ShowMatrix(long long** matr,int n, int k)
+//{
+//	for (size_t i = 0; i < n+1; i++)
+//	{
+//		for (size_t j = 0; j < k+1; j++)
+//		{
+//			printf("%d ", matr[i][j]);
+//		}
+//		putchar('\n');
+//	}
+//}
+
 long long** CreateMatrix(int const n, int const k)
 {
 	long long** NewMatrix = (long long**)malloc((n + 1) * sizeof(long long*));
@@ -10,54 +22,6 @@ long long** CreateMatrix(int const n, int const k)
 			NewMatrix[i][j] = -1;
 	}
 	return NewMatrix;
-}
-
-void ShowMatrix(long long** matr,int n, int k)
-{
-	for (size_t i = 0; i < n+1; i++)
-	{
-		for (size_t j = 0; j < k+1; j++)
-		{
-			printf("%d ", matr[i][j]);
-		}
-		putchar('\n');
-	}
-}
-
-int IsInMemo(int const n, int const remainder, memo const Memo)
-{
-	if (Memo.n == n && Memo.remainder == remainder)
-		return 1;
-	else
-		return 0;
-}
-
-FullMemo* InitFullMemo()
-{
-	FullMemo* NewMemo = (FullMemo*)malloc(sizeof(FullMemo));
-	NewMemo->MemoArray = (memo*)malloc(sizeof(memo));
-	NewMemo->MemoSize = 0;
-	return NewMemo;
-}
-//
-//memo* Finder(int const n, int const remainder)
-//{
-//	for (size_t i = 0; i < n; i++)
-//	{
-//		for (size_t j = 0; j < remainder; j++)
-//		{
-//			
-//		}
-//	}
-//}
-
-void AddToMemo(int const n, int const remainder, int const Amount, FullMemo* Memo)
-{
-	Memo->MemoArray = (memo*)realloc(Memo->MemoArray, (++Memo->MemoSize)*sizeof(memo));
-
-	Memo->MemoArray[Memo->MemoSize - 1].Amount = Amount;
-	Memo->MemoArray[Memo->MemoSize - 1].remainder = remainder;
-	Memo->MemoArray[Memo->MemoSize - 1].n = n;
 }
 
 void ZeroFill(long long* const arr, int const Size)
@@ -76,8 +40,6 @@ long long GetSum(long long* const arr, int const Size)
 
 long long FindAmount(int const n, int const k, long long** HelperMatrix)
 {
-	
-
 	if (k == 0)
 	{
 		return 1;
