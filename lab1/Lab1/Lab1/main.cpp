@@ -1,15 +1,13 @@
 #include "Header.h"
 
-
 extern long long FindAmount(int const n, int const k, long long** HelperMatrix);
-extern FullMemo* InitFullMemo();
 extern long long** CreateMatrix(int const n, int const k);
-extern void ShowMatrix(long long** matr, int n, int k);
+//extern void ShowMatrix(long long** matr, int n, int k);
 
-int main(int argc, char* argv)
+int main(int argc, char* argv[])
 {
 
-	int n, k;
+	int n = 3, k = 2;
 
 	printf("Type in n and k parameters, please.\n");
 	scanf("%d %d", &n, &k);
@@ -19,4 +17,7 @@ int main(int argc, char* argv)
 
 
 	printf("%lld\n",FindAmount(n, k, HelperMatrix));
+
+	testing::InitGoogleTest(&argc, argv);
+	return RUN_ALL_TESTS();
 }

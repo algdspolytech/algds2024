@@ -14,14 +14,19 @@
 
 long long** CreateMatrix(int const n, int const k)
 {
-	long long** NewMatrix = (long long**)malloc((n + 1) * sizeof(long long*));
-	for (size_t i = 0; i < n + 1; i++)
+	if (n == 0 || k == 0)
+		return NULL;
+	else
 	{
-		NewMatrix[i] = (long long*)malloc((k + 1)*sizeof(long long));
-		for (size_t j = 0; j < k + 1; j++)
-			NewMatrix[i][j] = -1;
+		long long** NewMatrix = (long long**)malloc((n + 1) * sizeof(long long*));
+		for (size_t i = 0; i < n + 1; i++)
+		{
+			NewMatrix[i] = (long long*)malloc((k + 1) * sizeof(long long));
+			for (size_t j = 0; j < k + 1; j++)
+				NewMatrix[i][j] = -1;
+		}
+		return NewMatrix;
 	}
-	return NewMatrix;
 }
 
 void ZeroFill(long long* const arr, int const Size)
