@@ -17,4 +17,5 @@ FILE* OpenFile(char* name, char* mode);
 void CloseFile(FILE* file);
 
 int Finder(Data data);
+int MaxSum(const Thing* f, const int size, const int sum_before);
 void Init(const FILE* file, Data* data);
