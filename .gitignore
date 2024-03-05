@@ -1,2 +1,4 @@
 .vscode/
 lab1/main
+googletest/
+lab1/test
