@@ -3,13 +3,13 @@
 
 #define INF 2147483647
 
-// Функции
+
 int min(int a, int b);
 void readMatrixSize(int *n, int *m);
-void readMatrix(int n, int m, int A[n][m]);
-void initializePenalty(int n, int m, int penalty[n][m]);
-void fillPenalty(int n, int m, int A[n][m], int penalty[n][m]);
-void printPenalty(int n, int m, int penalty[n][m]);
+void readMatrix(int n, int m, int **A);
+void initializePenalty(int n, int m, int **penalty);
+void fillPenalty(int n, int m, int **A, int **penalty);
+void printPenalty(int n, int m, int **penalty);
 
-#endif /* MATRIX_OPERATIONS_H */
+#endif 
 

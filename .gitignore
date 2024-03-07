@@ -1,4 +1,5 @@
 .vscode/
-lab1/main
+lab1/build/
 googletest/
-lab1/test
+lab1/test.c
+

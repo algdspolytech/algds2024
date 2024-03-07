@@ -13,7 +13,7 @@ void readMatrixSize(int *n, int *m) {
     scanf("%d %d", n, m);
 }
 
-void readMatrix(int n, int m, int A[n][m]) {
+void readMatrix(int n, int m, int **A) {
     // Функция для считывания элементов матрицы
     printf("Введите элементы матрицы:\n");
     for (int i = 0; i < n; i++) {
@@ -23,7 +23,7 @@ void readMatrix(int n, int m, int A[n][m]) {
     }
 }
 
-void initializePenalty(int n, int m, int penalty[n][m]) {
+void initializePenalty(int n, int m, int **penalty) {
     // Инициализируем penalty с INF
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
@@ -32,7 +32,7 @@ void initializePenalty(int n, int m, int penalty[n][m]) {
     }
 }
 
-void fillPenalty(int n, int m, int A[n][m], int penalty[n][m]) {
+void fillPenalty(int n, int m, int **A, int **penalty) {
     // Начальная строка
     for (int j = 0; j < m; j++) {
         penalty[0][j] = A[0][j];
@@ -50,7 +50,7 @@ void fillPenalty(int n, int m, int A[n][m], int penalty[n][m]) {
     }
 }
 
-void printPenalty(int n, int m, int penalty[n][m]) {
+void printPenalty(int n, int m, int **penalty) {
     // Выводим минимальный штраф на каждой строке
     for (int j = 0; j < m; j++) {
         printf("Минимальный штраф для прохода из первой строки в последнюю в столбце %d: %d\n", j + 1, penalty[n - 1][j]);
