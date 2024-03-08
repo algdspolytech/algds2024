@@ -14,7 +14,7 @@ TEST(LCSTest, BasicTest) {
     int n = strlen(Y);
     char* result = findLCS(X, Y, m, n);
     ASSERT_STREQ(result, "1001");
-    free(result); // Очистка памяти после каждого тест1а
+    free(result); // Очистка памяти после каждого теста
 }
 
 TEST(LCSTest, TestEmptyString) {
