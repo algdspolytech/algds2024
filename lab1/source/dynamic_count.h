@@ -1,8 +1,8 @@
-#pragma once
+﻿#pragma once
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 
 typedef int** DynamicTable;
 
-int �ountNumbers(int n, int k);
+int сountNumbers(int n, int k);

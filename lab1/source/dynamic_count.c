@@ -1,4 +1,4 @@
-#include "dynamic_count.h"
+﻿#include "dynamic_count.h"
 
 DynamicTable setupDynamicTable(int n, int k) {
 	DynamicTable dynamicTable = malloc(sizeof(int*) * (n + 1));
@@ -31,7 +31,7 @@ void freeDynamicTable(DynamicTable dynamicTable, int n, int k) {
 	}
 }
 
-int �ountNumbers(int n, int k)
+int сountNumbers(int n, int k)
 {
 	int numbersCount = 0;
 
