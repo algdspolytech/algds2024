@@ -5,4 +5,4 @@
 
 typedef int** DynamicTable;
 
-int сountNumbers(int n, int k);
+int countNumbers(int n, int k);

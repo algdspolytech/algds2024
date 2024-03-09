@@ -8,7 +8,7 @@
 
 void countNumbersTest(CuTest* tc, int n, int k, int expected) {
     printf_s("Starting for n = %i, k = %i ...\n", n, k);
-    int actual = сountNumbers(n, k);
+    int actual = countNumbers(n, k);
 
     CuAssertIntEquals(tc, expected, actual);
 }

@@ -31,7 +31,7 @@ void freeDynamicTable(DynamicTable dynamicTable, int n, int k) {
 	}
 }
 
-int сountNumbers(int n, int k)
+int countNumbers(int n, int k)
 {
 	int numbersCount = 0;
 

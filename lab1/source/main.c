@@ -24,7 +24,7 @@ void customTest() {
 
 	printf_s("Выполняется вычисление...\n");
 	time = clock();
-	countDyn = сountNumbers(n, k);
+	countDyn = countNumbers(n, k);
 	dynElapsedTime = (double)(clock() - time) / CLOCKS_PER_SEC;
 
 	printf_s("Результат: %i; время расчёта: %lf\n", countDyn, dynElapsedTime);
@@ -72,7 +72,7 @@ void menu() {
 			return;
 			break;
 		default:
-			printf_s("Команды с таким кодом не существует");
+			printf_s("Команды c таким кодом не существует");
 			break;
 		}
 	}
