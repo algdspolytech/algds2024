@@ -5,7 +5,6 @@
 
 #include "dynamic_count.h"
 #include "trivial.h"
-#include "tests/cutest/dynamic_count_test.h"
 
 
 void customTest() {
@@ -30,7 +29,7 @@ void customTest() {
 	printf_s("Результат: %llu; время расчёта: %lf\n", countDyn, dynElapsedTime);
 
 	if (answer == 'y') {
-		int countEnum = 0;
+		size_t countEnum = 0;
 		double enumElapsedTIme;
 
 		printf_s("Выполняется вычисление перебором...\n");
@@ -38,16 +37,15 @@ void customTest() {
 		countEnum = countNumberViaEnum(n, k);
 		enumElapsedTIme = (double)(clock() - time) / CLOCKS_PER_SEC;
 
-		printf_s("Перебор: результат: %i; время расчёта: %lf\n", countEnum, enumElapsedTIme);
+		printf_s("Перебор: результат: %llu; время расчёта: %lf\n", countEnum, enumElapsedTIme);
 	}
 }
 
 
 void printHelp() {
 	printf_s(
-		"1 - CuTest-тестирование\n"
-		"2 - ввести свои n, k\n"
-		"3 - выход\n> "
+		"1 - ввести n, k\n"
+		"2 - выход\n> "
 	);
 }
 
@@ -63,12 +61,9 @@ void menu() {
 
 		switch (answer) {
 		case '1':
-			runAllTests();
-			break;
-		case '2':
 			customTest();
 			break;
-		case '3':
+		case '2':
 			return;
 			break;
 		default:

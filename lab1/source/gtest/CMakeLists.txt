@@ -20,7 +20,7 @@ FetchContent_MakeAvailable(googletest)
 
 set(TEST_NAME lab1_test)
 
-set(SOURCE_DIR ../../)
+set(SOURCE_DIR ../)
 
 set(TEST_FILES
         dynamic_count_test.cpp

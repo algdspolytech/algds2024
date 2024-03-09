@@ -2,25 +2,25 @@
 #include <stdio.h>
 #include "trivial.h"
 
-int sumOfDigits(Number number, int n) {
-	int sum = 0;
+size_t sumOfDigits(Number number, size_t n) {
+	size_t sum = 0;
 
-	for (int index = 0; index < n; index++) {
+	for (size_t index = 0; index < n; index++) {
 		sum += number[index];
 	}
 
 	return sum;
 }
 
-void printNumber(Number number, int n) {
-	for (int i = 0; i < n; i++) {
+void printNumber(Number number, size_t n) {
+	for (size_t i = 0; i < n; i++) {
 		printf("%i ", number[i]);
 	}
 	printf("\n");
 }
 
-int countNumberViaEnumRec(Number number, int n, int k, int curDigitIndex) {
-	int numberCount = 0;
+size_t countNumberViaEnumRec(Number number, size_t n, size_t k, size_t curDigitIndex) {
+	size_t numberCount = 0;
 
 	if (curDigitIndex == n) {
 		return 0;
@@ -39,7 +39,7 @@ int countNumberViaEnumRec(Number number, int n, int k, int curDigitIndex) {
 	return numberCount;
 }
 
-int countNumberViaEnum(int n, int k)
+size_t countNumberViaEnum(size_t n, size_t k)
 {
 	Number number = malloc(sizeof(Digit) * n);
 
@@ -47,11 +47,11 @@ int countNumberViaEnum(int n, int k)
 		return 0;
 	}
 
-	for (int i = 0; i < n; i++) {
+	for (size_t i = 0; i < n; i++) {
 		number[i] = 0;
 	}
 
-	int numberCount = countNumberViaEnumRec(number, n, k, 0);
+	size_t numberCount = countNumberViaEnumRec(number, n, k, 0);
 
 	free(number);
 
