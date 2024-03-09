@@ -12,7 +12,7 @@ int sumOfDigits(Number number, int n) {
 	return sum;
 }
 
-int findViaEnumRec(Number number, int n, int k, int curDigitIndex) {
+int countNumberViaEnumRec(Number number, int n, int k, int curDigitIndex) {
 	int numberCount = 0;
 
 	if (curDigitIndex == n) {
@@ -22,7 +22,7 @@ int findViaEnumRec(Number number, int n, int k, int curDigitIndex) {
 	for (Digit digit = 0; digit <= 9; digit++) {
 		number[curDigitIndex] = digit;
 
-		numberCount += findViaEnumRec(number, n, k, curDigitIndex + 1);
+		numberCount += countNumberViaEnumRec(number, n, k, curDigitIndex + 1);
 
 		if (sumOfDigits(number, n) == k) {
 			numberCount++;
@@ -44,7 +44,7 @@ int countNumberViaEnum(int n, int k)
 		number[i] = 0;
 	}
 
-	int numberCount = findViaEnumRec(number, n, k, 0);
+	int numberCount = countNumberViaEnumRec(number, n, k, 0);
 
 	free(number);
 

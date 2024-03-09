@@ -130,14 +130,14 @@
     <ClCompile Include="source\dynamic_count.c" />
     <ClCompile Include="source\main.c" />
     <ClCompile Include="source\tests\cutest\CuTest.c" />
-    <ClCompile Include="source\tests\dynamic_count_tests.c" />
-    <ClCompile Include="source\tests\trivial.c" />
+    <ClCompile Include="source\tests\cutest\dynamic_count_test.c" />
+    <ClCompile Include="source\trivial.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\dynamic_count.h" />
     <ClInclude Include="source\tests\cutest\CuTest.h" />
-    <ClInclude Include="source\tests\dynamic_count_tests.h" />
-    <ClInclude Include="source\tests\trivial.h" />
+    <ClInclude Include="source\tests\cutest\dynamic_count_test.h" />
+    <ClInclude Include="source\trivial.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

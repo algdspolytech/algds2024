@@ -21,13 +21,13 @@
     <ClCompile Include="source\dynamic_count.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\tests\dynamic_count_tests.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\tests\cutest\CuTest.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\tests\trivial.c">
+    <ClCompile Include="source\tests\cutest\dynamic_count_test.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\trivial.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,13 +35,13 @@
     <ClInclude Include="source\dynamic_count.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\tests\dynamic_count_tests.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\tests\cutest\CuTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\tests\trivial.h">
+    <ClInclude Include="source\tests\cutest\dynamic_count_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\trivial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,4 +5,4 @@
 
 typedef int** DynamicTable;
 
-int countNumbers(int n, int k);
+extern int countNumbers(int n, int k);

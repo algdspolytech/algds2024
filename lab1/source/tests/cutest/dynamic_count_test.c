@@ -1,10 +1,10 @@
 ﻿#include <stdio.h>
 
-#include "dynamic_count_tests.h"
-#include "cutest/CuTest.h"
+#include "dynamic_count_test.h"
+#include "CuTest.h"
 
-#include "../dynamic_count.h"
-#include "trivial.h"
+#include "../../dynamic_count.h"
+#include "../../trivial.h"
 
 void countNumbersTest(CuTest* tc, int n, int k, int expected) {
     printf_s("Starting for n = %i, k = %i ...\n", n, k);

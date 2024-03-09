@@ -4,8 +4,8 @@
 #include <locale.h>
 
 #include "dynamic_count.h"
-#include "tests/trivial.h"
-#include "tests/dynamic_count_tests.h"
+#include "trivial.h"
+#include "tests/cutest/dynamic_count_test.h"
 
 
 void customTest() {
