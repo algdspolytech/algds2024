@@ -1,5 +1,5 @@
 ﻿#include <stdlib.h>
-
+#include <stdio.h>
 #include "trivial.h"
 
 int sumOfDigits(Number number, int n) {
@@ -10,6 +10,13 @@ int sumOfDigits(Number number, int n) {
 	}
 
 	return sum;
+}
+
+void printNumber(Number number, int n) {
+	for (int i = 0; i < n; i++) {
+		printf("%i ", number[i]);
+	}
+	printf("\n");
 }
 
 int countNumberViaEnumRec(Number number, int n, int k, int curDigitIndex) {
@@ -24,7 +31,7 @@ int countNumberViaEnumRec(Number number, int n, int k, int curDigitIndex) {
 
 		numberCount += countNumberViaEnumRec(number, n, k, curDigitIndex + 1);
 
-		if (sumOfDigits(number, n) == k) {
+		if (curDigitIndex == n - 1 && sumOfDigits(number, n) == k) {
 			numberCount++;
 		}
 	}
