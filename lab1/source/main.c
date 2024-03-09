@@ -1,4 +1,4 @@
-#include <time.h>
+п»ї#include <time.h>
 #include <stdio.h>
 #include <conio.h>
 #include <locale.h>
@@ -11,9 +11,9 @@
 void customTest() {
 	int n, k;
 	
-	printf_s("Введите n и k через пробел: ");
+	printf_s("Р’РІРµРґРёС‚Рµ n Рё k С‡РµСЂРµР· РїСЂРѕР±РµР»: ");
 	scanf_s("%i %i", &n, &k);
-	printf_s("Хотите выполнить для сравнения алгоритм перебора (очень долгий)? (y/n): ");
+	printf_s("РҐРѕС‚РёС‚Рµ РІС‹РїРѕР»РЅРёС‚СЊ РґР»СЏ СЃСЂР°РІРЅРµРЅРёСЏ Р°Р»РіРѕСЂРёС‚Рј РїРµСЂРµР±РѕСЂР° (РѕС‡РµРЅСЊ РґРѕР»РіРёР№)? (y/n): ");
 	char answer = _getch();
 	printf_s("\n");
 
@@ -22,32 +22,32 @@ void customTest() {
 	int countDyn = 0;
 	double dynElapsedTime;
 
-	printf_s("Выполняется вычисление...\n");
+	printf_s("Р’С‹РїРѕР»РЅСЏРµС‚СЃСЏ РІС‹С‡РёСЃР»РµРЅРёРµ...\n");
 	time = clock();
-	countDyn = сountNumbers(n, k);
+	countDyn = СЃountNumbers(n, k);
 	dynElapsedTime = (double)(clock() - time) / CLOCKS_PER_SEC;
 
-	printf_s("Результат: %i; время расчёта: %lf\n", countDyn, dynElapsedTime);
+	printf_s("Р РµР·СѓР»СЊС‚Р°С‚: %i; РІСЂРµРјСЏ СЂР°СЃС‡С‘С‚Р°: %lf\n", countDyn, dynElapsedTime);
 
 	if (answer == 'y') {
 		int countEnum = 0;
 		double enumElapsedTIme;
 
-		printf_s("Выполняется вычисление перебором...\n");
+		printf_s("Р’С‹РїРѕР»РЅСЏРµС‚СЃСЏ РІС‹С‡РёСЃР»РµРЅРёРµ РїРµСЂРµР±РѕСЂРѕРј...\n");
 		time = clock();
 		countEnum = countNumberViaEnum(n, k);
 		enumElapsedTIme = (double)(clock() - time) / CLOCKS_PER_SEC;
 
-		printf_s("Перебор: результат: %i; время расчёта: %lf\n", countEnum, enumElapsedTIme);
+		printf_s("РџРµСЂРµР±РѕСЂ: СЂРµР·СѓР»СЊС‚Р°С‚: %i; РІСЂРµРјСЏ СЂР°СЃС‡С‘С‚Р°: %lf\n", countEnum, enumElapsedTIme);
 	}
 }
 
 
 void printHelp() {
 	printf_s(
-		"1 - запустить юнит-тестирование\n"
-		"2 - ввести свои n, k\n"
-		"3 - выход\n> "
+		"1 - Р·Р°РїСѓСЃС‚РёС‚СЊ СЋРЅРёС‚-С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ\n"
+		"2 - РІРІРµСЃС‚Рё СЃРІРѕРё n, k\n"
+		"3 - РІС‹С…РѕРґ\n> "
 	);
 }
 
@@ -72,7 +72,7 @@ void menu() {
 			return;
 			break;
 		default:
-			printf_s("Команды с таким кодом не существует");
+			printf_s("РљРѕРјР°РЅРґС‹ СЃ С‚Р°РєРёРј РєРѕРґРѕРј РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚");
 			break;
 		}
 	}
