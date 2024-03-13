@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<GtaTestDurations xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Executable>C:\Users\Марина\source\repos\DataDesign1\x64\Debug\Sample-Test1.exe</Executable>
-  <TestDurations>
-    <TestDuration Test="TestCaseName1.TestName1" Duration="1" />
-  </TestDurations>
-</GtaTestDurations>
