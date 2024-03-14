@@ -16,15 +16,15 @@ int main() {
     };
     int edgesSize = 12;
 
-    // Ñîçäàíèå ãðàôàааавававыапривета
+    // Создание графа
     graph* myGraph = createGraph(n, edges, edgesSize);
 
-    // Âûâîä ãðàôà
+    // Вывод графа
     printGraphAdjMatrix(myGraph);
 
     printGraph(myGraph);
 
-    // Ïîèñê êðàò÷àéøåãî ïóòè ìåæäó 
+    // Поиск кратчайшего пути между 
     int shortestPathCost;
     int a = -1, b = -1;
     printf("Ââåäèòå îò êàêîé òî÷êè äî êàêîé íàéòè ìèíèìàëüíîå ðàññòîÿíèå:\n");
@@ -38,7 +38,7 @@ int main() {
         }
         printf("Ââåäèòå äâå òî÷êè:\n");
     }
-    // Îñâîáîæäåíèå ïàìÿòè
+    // Освобождение памяти
     freeGraph(myGraph);
 
     return 0;
