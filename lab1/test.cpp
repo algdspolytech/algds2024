@@ -13,6 +13,7 @@ TEST(Find_The_Max_Path0, Zero_Board) {
 	int N = 0;
 	int** board = (int**)malloc(N * sizeof(int*));
 	EXPECT_EQ(0, Find_Max_Path(board, N));
+	free(board);
 }
 
 TEST(Find_The_Max_Path1, One_on_One_Board) {
@@ -24,6 +25,11 @@ TEST(Find_The_Max_Path1, One_on_One_Board) {
 	board[0][0] = 5;
 
 	EXPECT_EQ(5, Find_Max_Path(board, N));
+
+	for (int i = 0; i < N; i++) {
+		free(board[i]);
+	}
+	free(board);
 }
 
 TEST(Find_The_Max_Path2, The_Simple_Path) {
@@ -38,6 +44,11 @@ TEST(Find_The_Max_Path2, The_Simple_Path) {
 	board[3][0] = 7; board[3][1] = 0; board[3][2] = 0; board[3][3] = 0;
 
 	EXPECT_EQ(22, Find_Max_Path(board, N));
+
+	for (int i = 0; i < N; i++) {
+		free(board[i]);
+	}
+	free(board);
 }
 
 TEST(Find_The_Max_Path3, An_Empty_Board) {
@@ -52,6 +63,11 @@ TEST(Find_The_Max_Path3, An_Empty_Board) {
 	board[3][0] = 0; board[3][1] = 0; board[3][2] = 0; board[3][3] = 0;
 
 	EXPECT_EQ(0, Find_Max_Path(board, N));
+
+	for (int i = 0; i < N; i++) {
+		free(board[i]);
+	}
+	free(board);
 }
 
 TEST(Find_The_Max_Path4, The_Random_Board) {
@@ -67,4 +83,9 @@ TEST(Find_The_Max_Path4, The_Random_Board) {
 	board[4][0] = -3; board[4][1] = 1; board[4][2] = 15; board[4][3] = -4; board[4][4] = 2;
 
 	EXPECT_EQ(38, Find_Max_Path(board, N));
+
+	for (int i = 0; i < N; i++) {
+		free(board[i]);
+	}
+	free(board);
 }
