@@ -1,9 +1,10 @@
 #include "util.h"
 
-int min1(int a, int b) {
-    return (a < b) ? a : b;
-}
 graph* createGraph(int n, int edges[][3], int edgesSize) {
+    if (n <= 0 || edges == NULL || edgesSize <= 0) {
+        printf("Ошибка: неверные входные данные для создания графа.\n");
+        return NULL;
+    }
     graph* obj = (graph*)malloc(sizeof(graph));
     obj->n = n;
     obj->adj = (int**)calloc(n, sizeof(int*));
@@ -15,6 +16,11 @@ graph* createGraph(int n, int edges[][3], int edgesSize) {
     }
 
     for (int i = 0; i < edgesSize; i++) {
+        if (edges[i][0] < 0 || edges[i][0] >= n || edges[i][1] < 0 || edges[i][1] >= n) {
+            printf("Ошибка: неверные данные ребра.\n");
+            freeGraph(obj);
+            return NULL;
+        }
         graphAddEdge(obj, edges[i]);
     }
 
@@ -60,7 +66,10 @@ int minCost(int* cost, bool* visited, int n)
     return min_node;
 }
 int graphShortestPath(graph* obj, int node1, int node2) {
-
+    if (obj == NULL || node1 < 0 || node1 >= obj->n || node2 < 0 || node2 >= obj->n) {
+        printf("Ошибка: неверные входные данные для поиска кратчайшего пути.\n");
+        return -1;
+    }
     for (int i = 0; i < obj->n; i++) {
         obj->cost[i] = INT_MAX,
             obj->visited[i] = false;
@@ -68,7 +77,7 @@ int graphShortestPath(graph* obj, int node1, int node2) {
 
     obj->cost[node1] = 0;
 
-    /* Dijkstra's Algorithm */
+    // алгоритм дейкстры 
     for (int i = 0; i < obj->n - 1; i++) {
 
         int src = minCost(obj->cost, obj->visited, obj->n);
@@ -87,6 +96,10 @@ int graphShortestPath(graph* obj, int node1, int node2) {
     return obj->cost[node2] == INT_MAX ? -1 : obj->cost[node2];
 }
 void printGraph(graph* obj) {
+    if (obj == NULL) {
+        printf("Ошибка: неинициализированный граф.\n");
+        return;
+    }
     if (obj->n == 9) {
         printf("Граф:\n");
         printf("(0)-%d-(1)-%d-(2)\n", obj->adj[0][1], obj->adj[1][2]);

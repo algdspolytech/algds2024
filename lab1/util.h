@@ -19,6 +19,5 @@ void freeGraph(graph* obj);
 void printGraph(graph* obj);
 int graphShortestPath(graph* obj, int node1, int node2);
 int minCost(int* cost, bool* visited, int n);
-int min1(int a, int b);
 
 #endif
