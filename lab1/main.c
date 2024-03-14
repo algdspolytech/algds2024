@@ -10,11 +10,11 @@ typedef struct {
     bool* visited;
 } graph;
 
-graph* createGraph(int n, int edges[][3], int edgesSize, int* edgesColSize);
-void graphAddEdge(graph* obj, int* edge, int edgeSize);
+graph* createGraph(int n, int edges[][3], int edgesSize);
+void graphAddEdge(graph* obj, int* edge);
 void printGraphAdjMatrix(graph* obj);
 void freeGraph(graph* obj);
-void printNamedGraph(graph* obj);
+void printGraph(graph* obj);
 int graphShortestPath(graph* obj, int node1, int node2);
 int minCost(int* cost, bool* visited, int n);
 
@@ -33,15 +33,14 @@ int main() {
         {7, 8, 4}
     };
     int edgesSize = 12;
-    int edgesColSize[] = { 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 };
 
     // Создание графа
-    graph* myGraph = createGraph(n, edges, edgesSize, edgesColSize);
+    graph* myGraph = createGraph(n, edges, edgesSize);
 
     // Вывод графа
     printGraphAdjMatrix(myGraph);
 
-    printNamedGraph(myGraph);
+    printGraph(myGraph);
 
     // Поиск кратчайшего пути между 
     int shortestPathCost;
@@ -63,7 +62,7 @@ int main() {
     return 0;
 }
 
-graph* createGraph(int n, int edges[][3], int edgesSize, int* edgesColSize) {
+graph* createGraph(int n, int edges[][3], int edgesSize) {
     graph* obj = malloc(sizeof(graph));
     obj->n = n;
     obj->adj = (int**)calloc(n, sizeof(int*));
@@ -75,20 +74,18 @@ graph* createGraph(int n, int edges[][3], int edgesSize, int* edgesColSize) {
     }
 
     for (int i = 0; i < edgesSize; i++) {
-        graphAddEdge(obj, edges[i], edgesColSize[i]);
+        graphAddEdge(obj, edges[i]);
     }
 
     return obj;
 }
 
-void graphAddEdge(graph* obj, int* edge, int edgeSize) {
-    if (edgeSize >= 3) {
-        obj->adj[edge[0]][edge[1]] = edge[2];
-    }
+void graphAddEdge(graph* obj, int* edge) {
+    obj->adj[edge[0]][edge[1]] = edge[2];
 }
 
 void printGraphAdjMatrix(graph* obj) {
-    printf("Adjacency matrix of graph:\n");
+    printf("Матрица смежности графа:\n");
     for (int i = 0; i < obj->n; i++) {
         for (int j = 0; j < obj->n; j++) {
             
@@ -148,16 +145,21 @@ int graphShortestPath(graph* obj, int node1, int node2) {
 
     return obj->cost[node2] == INT_MAX ? -1 : obj->cost[node2];
 }
-void printNamedGraph(graph* obj) {
-    printf("Graph:\n");
-    printf("(0)-%d-(1)-%d-(2)\n", obj->adj[0][1], obj->adj[1][2]);
-    printf(" |     |     |\n");
-    printf(" %d     %d     %d\n", obj->adj[0][3], obj->adj[1][4], obj->adj[2][5]);
-    printf(" |     |     |\n");
-    printf("(3)-%d-(4)-%d-(5)\n", obj->adj[3][4], obj->adj[4][5]);
-    printf(" |     |     |\n");
-    printf(" %d     %d     %d\n", obj->adj[3][6], obj->adj[4][7], obj->adj[5][8]);
-    printf(" |     |     |\n");
-    printf("(6)-%d-(7)-%d-(8)\n", obj->adj[6][7], obj->adj[7][8]);
-    printf("\n");
+void printGraph(graph* obj) {
+    if (obj->n == 9) {
+        printf("Граф:\n");
+        printf("(0)-%d-(1)-%d-(2)\n", obj->adj[0][1], obj->adj[1][2]);
+        printf(" |     |     |\n");
+        printf(" %d     %d     %d\n", obj->adj[0][3], obj->adj[1][4], obj->adj[2][5]);
+        printf(" |     |     |\n");
+        printf("(3)-%d-(4)-%d-(5)\n", obj->adj[3][4], obj->adj[4][5]);
+        printf(" |     |     |\n");
+        printf(" %d     %d     %d\n", obj->adj[3][6], obj->adj[4][7], obj->adj[5][8]);
+        printf(" |     |     |\n");
+        printf("(6)-%d-(7)-%d-(8)\n", obj->adj[6][7], obj->adj[7][8]);
+        printf("\n");
+    }
+    else {
+        printf("Ошибка. Пока что этим методом можно вывести набор точек с улицами размерности 3x3\n");
+    }
 }
