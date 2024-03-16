@@ -6,7 +6,7 @@ int rand_col = 3;
 int** rand_matrix = AllocMatrix(rand_row, rand_col);
 
 TEST(TestMainFunc, TwoSamePaths) {
-	//создадим матрицу для теста
+	//making matrix for a test
 	for (int i = 0; i < rand_row; i++) {
 		rand_matrix[i][0] = 1;
 		rand_matrix[i][1] = 2;
