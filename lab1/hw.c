@@ -1,25 +1,22 @@
 #include <stdio.h>
-#include <locale.h>
 #include <stdlib.h>
 #include <malloc.h>
 #pragma warning(disable: 4996)
 #include "hw.h"
 
-/*Входные данные: Чтение матрицы из файла
-1ая строка - n
-вторая - m
-далее строки - как строки матрицы А
+/*Input: Reading a matrix from a file
+1st line - n
+second - m
+further rows are like rows of matrix A
 
-Выходные данные:
-Число - минимальный штраф*/
+Output:
+The number is the minimum fine*/
 
 int main() {
-	system("chcp 1251");
-	setlocale(LC_CTYPE, "Russian");
-	//открытие файла для чтения
+	//opening a text file to read
 	FILE* file = fopen("matrix.txt", "r");
 	CheckFopen(file);
-	//чтение матрицы
+	//readiing a matrix
 	int row, col;
 	int** matrix;
 	CheckFscanf(fscanf(file, "%d\n%d", &row, &col));
@@ -27,7 +24,7 @@ int main() {
 	Fclose(file);
 
 	int min = FindMinFine(matrix, row, col);
-	printf("Размер минимального штрафа : %d\nЕсли результат нулевой, проверьте входные данные\n", min);
+	printf("Minimum fine: %d\nIf the result is zero, check the input data\n", min);
 	FreeMatrix(matrix, row);
 	return 0;
 }
