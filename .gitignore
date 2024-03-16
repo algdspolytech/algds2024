@@ -1,0 +1,5 @@
+.vscode/
+lab1/build/
+lab1/googletest/
+lab1/test.c
+lab1/.vs
