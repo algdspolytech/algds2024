@@ -1,3 +1,3 @@
 #pragma once
 
-int FindCountMax(char name[20]);
+int FindCountMax(int* numbers, int array_length);

@@ -3,46 +3,28 @@
 #include <stdio.h>
 #include "HelpFunc.h"
 
-int FindCountMax(char name[20]) {
-    FILE* ptr;
-    int count = 1;
-    int countMax = 1;
-    char c;
 
-    ptr = fopen(name, "r");
+int FindCountMax(int *numbers, int array_length) {
+	int count = 1;
+	int countMax = 1;
+	
+	int integer = 0;
 
+	while (integer + 1 <array_length) {
+		if ((numbers[integer] != 0) && (numbers[integer + 1] % numbers[integer] == 0)) {
+			count++;
+			if (count > countMax) countMax = count;
 
-    if (ptr) {
-        int numbers[50];
-        int NumOfElm = 0;
+		}
+		else {
+			count = 1;
+		}
+		integer++;
+	}
 
-        while (fscanf_s(ptr, "%d", &numbers[NumOfElm]) != EOF) {
-            NumOfElm++; 
-        }
+	if (array_length == 0) countMax = 0;
+	
 
-        fclose(ptr);
-
-        int integer = 0;
-        while (integer + 1 < NumOfElm) {
-
-            if ((numbers[integer] != 0) && (numbers[integer + 1] % numbers[integer] == 0)) {
-                count++;
-                if (count > countMax) countMax = count;
-
-            }
-            else {
-                count = 1;
-            }
-            integer++;
-        }
-
-        if (NumOfElm == 0) countMax = 0;
-    }
-
-    else printf("File is not open\n");
-
-   
-
-    return countMax;
+	return countMax;
 }
 
