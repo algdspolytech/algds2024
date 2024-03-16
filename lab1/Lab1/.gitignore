@@ -4,5 +4,5 @@
 **/*vcxproj.user
 **/*vcxproj.filters
 **/*vcxproj
-pch.h
-pch.cpp
+**/*pch.h
+**/*pch.cpp
