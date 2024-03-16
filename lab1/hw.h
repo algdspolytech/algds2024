@@ -1,23 +1,9 @@
 #ifndef LAB_H
 #define LAB_H
 #include <stdio.h>
-#include <locale.h>
 #include <stdlib.h>
 #include <malloc.h>
 #pragma warning(disable: 4996)
-/*
-int FindMinFine(int** matrix, int row, int col);
-int FindMinInLine(int* arr, int size);
-void CheckFopen(FILE* file);
-void Fclose(FILE* file);
-void CheckMalloc(int* arr);
-void CheckMalloc2D(int** arr);
-void CheckFscanf(int value);
-int** AllocMatrix(int row, int col);
-int** ReadMatrix(FILE* file, int n, int m);
-void FreeMatrix(int** matrix, int row);
-int FindMinFine(int** matrix, int row, int col);
-*/
 
 void FreeMatrix(int** matrix, int row) {
 	for (int i = 0; i < row; i++) {
@@ -64,7 +50,7 @@ void CheckMalloc2D(int** arr) {
 	}
 }
 
-//выделение памяти для матрицы
+//memory allocation for matrix
 int** AllocMatrix(int row, int col) {
 	int** matrix = (int**)malloc(row * sizeof(int*));
 	CheckMalloc2D(matrix);
@@ -84,7 +70,6 @@ void CheckFscanf(int value) {
 
 int** ReadMatrix(FILE* file, int row, int col) {
 	int** matrix = AllocMatrix(row, col);
-	//чтение матрицы
 	for (int i = 0; i < row; i++) {
 		for (int j = 0; j < col; j++) {
 			CheckFscanf(fscanf(file, "%d", &matrix[i][j]));
@@ -93,23 +78,23 @@ int** ReadMatrix(FILE* file, int row, int col) {
 	return matrix;
 }
 
-//поиск минимально возможного штрафа
+//search for the minimum possible fine
 int FindMinFine(int** matrix, int row, int col) {
-	//проверка на неподходящие входные данные
+	//check for invalid input data
 	if ((row <= 0) || (col <= 0) || matrix == NULL) return 0;
-	//вспомогательная матрица для записи минимального штрафа в каждой ячейке
+	//help matrix to record the minimum penalty in each cell
 	int** fine = AllocMatrix(row, col);
 
-	//первая строка этой таблицы соответствует первой строке исходной матрицы
+	//the first row of this table corresponds to the first row of the original matrix
 	for (int j = 0; j < col; j++) {
 		fine[0][j] = matrix[0][j];
 	}
 
-	//рассматриваются все возможные пути (два или три) в данную клетку, записывается минимально из этих значений
+	//all possible paths (two or three) to a given cell are considered, the minimum of these values is written down
 	for (int i = 1; i < row; i++) {
 		for (int j = 0; j < col; j++) {
 			fine[i][j] = fine[i - 1][j] + matrix[i][j];
-			//тк для крайних столбцов есть только два пути, а не три, добавляются условия на j
+			//since for the outer columns there are only two paths, not three, conditions are added on j
 			if (j > 0) {
 				if (fine[i][j] > fine[i - 1][j - 1] + matrix[i][j]) {
 					fine[i][j] = fine[i - 1][j - 1] + matrix[i][j];
@@ -122,7 +107,7 @@ int FindMinFine(int** matrix, int row, int col) {
 			}
 		}
 	}
-	//находим минимальное значение в последней строке получившейся матрицы
+	//finding the minimum value in the last row of the resulting matrix
 	int min = FindMinInLine(fine[row - 1], col);
 	FreeMatrix(fine, row);
 	return min;
