@@ -89,12 +89,12 @@ void readfileTest() {
 	test1->seq = list1;
 	list_s* test1t = readfile("test1.txt");
 	if (test1->N != test1t->N) {
-		printf("test1 Error");
+		printf("readfileTest test1 Error");
 		exit(1);
 	}
 	for (int i = 0; i < 3; i++) {
 		if (test1->seq[i] != test1t->seq[i]) {
-			printf("test1 Error");
+			printf("readfileTest test1 Error");
 			exit(1);
 		}
 	}
@@ -109,12 +109,12 @@ void readfileTest() {
 	test2->seq = list2;
 	list_s* test2t = readfile("test2.txt");
 	if (test2->N != test2t->N) {
-		printf("test2 Error");
+		printf("readfileTest test2 Error");
 		exit(1);
 	}
 	for (int i = 0; i < 4; i++) {
 		if (test2->seq[i] != test2t->seq[i]) {
-			printf("test2 Error");
+			printf("readfileTest test2 Error");
 			exit(1);
 		}
 	}
@@ -127,12 +127,12 @@ void readfileTest() {
 	test3->seq = list3;
 	list_s* test3t = readfile("test3.txt");
 	if (test3->N != test3t->N) {
-		printf("test3 Error");
+		printf("readfileTest test3 Error");
 		exit(1);
 	}
 	for (int i = 0; i < 1; i++) {
 		if (test3->seq[i] != test3t->seq[i]) {
-			printf("test3 Error");
+			printf("readfileTest test3 Error");
 			exit(1);
 		}
 	}
@@ -140,10 +140,76 @@ void readfileTest() {
 	printf("readfileTest OK\n");
 }
 
+void functionTest() {
+
+	int* list1 = (int*)malloc(10 * sizeof(int));
+	int* list2 = (int*)malloc(8 * sizeof(int));
+	int* list3 = (int*)malloc(7 * sizeof(int));
+
+	for (int i = 0; i < 10; i++) {
+		list1[i] = 5;
+	}
+
+	list2[0] = 2;
+	list2[1] = 4;
+	list2[2] = 4;
+	list2[3] = 4;
+	list2[4] = 12;
+	list2[5] = 13;
+	list2[6] = 26;
+	list2[7] = 26;
+
+	list3[0] = 1;
+	list3[1] = 2;
+	list3[2] = 4;
+	list3[3] = 5;
+	list3[4] = 10;
+	list3[5] = 30;
+	list3[6] = 60;
+
+	list_s* test1 = function(list1, 10);
+	list_s* test2 = function(list2, 8);
+	list_s* test3 = function(list3, 7);
+
+	if (test1->N != 10) {
+		printf("functionTest test 1 Error");
+		exit(1);
+	}
+	if (test2->N != 5) {
+		printf("functionTest test 2 Error");
+		exit(1);
+	}
+	if (test3->N != 4) {
+		printf("functionTest test 3 Error");
+		exit(1);
+	}
+
+	for (int i = 0; i < 10; i++) {
+		if (test1->seq[i] != list1[i]) {
+			printf("functionTest test 1 Error");
+			exit(1);
+		}
+	}
+	for (int i = 0; i < 5; i++) {
+		if (test2->seq[i] != list2[i]) {
+			printf("functionTest test 2 Error");
+			exit(1);
+		}
+	}
+	for (int i = 0; i < 4; i++) {
+		if (test3->seq[i] != list3[i+3]) {
+			printf("functionTest test 3 Error");
+			exit(1);
+		}
+	}
+	printf("functionTest OK\n");
+}
+
 
 int main() {
 
 	readfileTest();
+	functionTest();
 
 	list_s* list = readfile("input.txt");
 
