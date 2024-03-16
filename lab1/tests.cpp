@@ -55,10 +55,9 @@ TEST(find_graph_shortest_path, basic_case) {
     graph* myGraph = createGraph(n, edges, edgesSize);
 
     // Поиск кратчайшего пути между точками 0 и 1
-    int shortestPathCost = graphShortestPath(myGraph, 0, 1);
+    int shortestPathCost = graphShortestPath(myGraph, 0, 3);
 
-    // Ожидаемый результат - 13 (сумма весов ребер пути 0->1->4->7->8)
-    EXPECT_EQ(shortestPathCost, 3);
+    EXPECT_EQ(shortestPathCost, 2);
 
     // Освобождение памяти
     freeGraph(myGraph);

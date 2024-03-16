@@ -16,12 +16,18 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-#set(SOURCE_EXE main.c)	
 enable_testing()
 
 add_executable(
   tests
   tests.cpp
+  util.c
+  util.h
+)
+
+add_executable(
+  main
+  main.c
   util.c
   util.h
 )
@@ -33,4 +39,3 @@ target_link_libraries(
 include(GoogleTest)
 gtest_discover_tests(tests)
 
-#add_executable(main ${SOURCE_EXE} )

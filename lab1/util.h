@@ -4,12 +4,11 @@
 #include <stdlib.h> 
 #include <stdbool.h>
 #include <locale.h>
+#include <stdio.h>
 
 typedef struct {
     int** adj;
     int n;
-    int* cost;
-    bool* visited;
 } graph;
 
 graph* createGraph(int n, int edges[][3], int edgesSize);

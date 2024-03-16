@@ -8,8 +8,6 @@ graph* createGraph(int n, int edges[][3], int edgesSize) {
     graph* obj = (graph*)malloc(sizeof(graph));
     obj->n = n;
     obj->adj = (int**)calloc(n, sizeof(int*));
-    obj->cost = (int*)calloc(n, sizeof(int));
-    obj->visited = (bool*)calloc(n, sizeof(bool));
 
     for (int i = 0; i < n; i++) {
         obj->adj[i] = (int*)calloc(n, sizeof(int));
@@ -48,8 +46,6 @@ void freeGraph(graph* obj) {
         free(obj->adj[i]);
     }
     free(obj->adj);
-    free(obj->cost);
-    free(obj->visited);
     free(obj);
 }
 int minCost(int* cost, bool* visited, int n)
@@ -65,35 +61,48 @@ int minCost(int* cost, bool* visited, int n)
 
     return min_node;
 }
-int graphShortestPath(graph* obj, int node1, int node2) {
-    if (obj == NULL || node1 < 0 || node1 >= obj->n || node2 < 0 || node2 >= obj->n) {
+#define INF INT_MAX
+
+int graphShortestPath(graph* obj, int start, int target) {
+    if (obj == NULL || start < 0 || start >= obj->n || target < 0 || target >= obj->n) {
         printf("Ошибка: неверные входные данные для поиска кратчайшего пути.\n");
         return -1;
     }
+
+    // Создание и инициализация матрицы расстояний
+    int** dist = (int**)malloc(obj->n * sizeof(int*));
     for (int i = 0; i < obj->n; i++) {
-        obj->cost[i] = INT_MAX,
-            obj->visited[i] = false;
+        dist[i] = (int*)malloc(obj->n * sizeof(int));
+        for (int j = 0; j < obj->n; j++) {
+            if (i == j)
+                dist[i][j] = 0;
+            else if (obj->adj[i][j] != 0)
+                dist[i][j] = obj->adj[i][j];
+            else
+                dist[i][j] = INF;
+        }
     }
 
-    obj->cost[node1] = 0;
-
-    // алгоритм дейкстры 
-    for (int i = 0; i < obj->n - 1; i++) {
-
-        int src = minCost(obj->cost, obj->visited, obj->n);
-
-        obj->visited[src] = true;
-
-        for (int dst = 0; dst < obj->n; dst++)
-            if (obj->visited[dst] == false && obj->adj[src][dst]
-                && obj->cost[src] != INT_MAX
-                && obj->cost[src] + obj->adj[src][dst] < obj->cost[dst]) {
-
-                obj->cost[dst] = obj->cost[src] + obj->adj[src][dst];
+    // алгоритма Флойда-Уоршелла для поиска кратчайших путей
+    for (int k = 0; k < obj->n; k++) {
+        for (int i = 0; i < obj->n; i++) {
+            for (int j = 0; j < obj->n; j++) {
+                if (dist[i][k] != INF && dist[k][j] != INF && dist[i][k] + dist[k][j] < dist[i][j])
+                    dist[i][j] = dist[i][k] + dist[k][j];
             }
+        }
     }
 
-    return obj->cost[node2] == INT_MAX ? -1 : obj->cost[node2];
+
+    int shortestPathCost = dist[start][target];
+
+    // Освобождение выделенной памяти
+    for (int i = 0; i < obj->n; i++) {
+        free(dist[i]);
+    }
+    free(dist);
+
+    return shortestPathCost == INF ? -1 : shortestPathCost;
 }
 void printGraph(graph* obj) {
     if (obj == NULL) {
