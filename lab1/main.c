@@ -3,7 +3,6 @@
 #include "find_max_incresing_subsequence.h"
 // Функция для нахождения максимальной возрастающей подпоследовательности
 
-
 int main() {
     int sequence[] = {10, 22, 9, 33, 21, 50, 41, 60, 80};
     int sequence_length = sizeof(sequence) / sizeof(sequence[0]);

@@ -1,7 +1,3 @@
-//
-// Created by Никита Швачко on 16.03.2024.
-//
-
 #ifndef LAB1_FIND_MAX_INCRESING_SUBSEQUENCE_H
 #define LAB1_FIND_MAX_INCRESING_SUBSEQUENCE_H
 
