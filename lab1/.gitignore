@@ -2,3 +2,4 @@
 **/Release
 **/.vs
 **/*vcxproj.user
+**/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7
