@@ -1,6 +1,5 @@
 #include <stdio.h>
-
-
+#include "funcs.h"
 
 int main(){
     int n, m;
