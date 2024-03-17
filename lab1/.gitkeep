@@ -1,1 +1,30 @@
+#include <stdio.h>
+
+int count_paths(int N, int K) {
+    // Инициализация массива для хранения количества путей до каждой клетки
+    int dp[N+1];
+    dp[0] = 1;  // Начальная клетка, один способ - остаться на месте
+
+    // Вычисляем количество путей для каждой клетки
+    for (int i = 1; i <= N; i++) {
+        dp[i] = 0;
+        for (int j = 1; j <= K; j++) {
+            if (i - j >= 0) {
+                dp[i] += dp[i - j];
+            }
+        }
+    }
+
+    return dp[N];
+}
+
+int main() {
+    int N = 3;
+    int K = 2;
+    int paths = count_paths(N, K);
+
+    printf("Количество различных путей: %d\n", paths);
+
+    return 0;
+}
 
