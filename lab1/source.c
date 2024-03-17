@@ -10,18 +10,18 @@
 
 typedef int u32;
 
-u32* create_a(u32 num)
+u32* create_a(u32 *num)
 { 
-    if (num == 0) {
+    if (*num == 0) {
         printf("there must be 2 numbers at least");
         exit(1);
     }
-    if (num == 1) {
+    if (*num == 1) {
         printf("there are must be more then 1 number");
         exit(1);
     }
-    u32* a = malloc(num * sizeof(u32));
-    for (int i = 0; i < num; i++)
+    u32* a = malloc(*num * sizeof(u32));
+    for (int i = 0; i < *num; i++)
     {
         scanf("%d", &a[i]);
         if (a[i] == " " || a[i] == '\0') {
@@ -32,17 +32,17 @@ u32* create_a(u32 num)
 }
 
 
-void proccessing(u32* a, int n) 
+void proccessing(u32* a, int *n) 
 {
     u32 max = 1, index_max = 1;
-    u32* c = (u32*)malloc(sizeof(u32) * (n + 1));
-    u32* b = (u32*)malloc(sizeof(u32) * (n + 1));
-    for (int i = 2; i < n+1; i++) {
+    u32* c = (u32*)malloc(sizeof(u32) * (*n + 1));
+    u32* b = (u32*)malloc(sizeof(u32) * (*n + 1));
+    for (int i = 2; i < *n+1; i++) {
         b[i] = 0;
     }
     b[1] = 1;
     c[1] = 0;
-    for (int i = 2; i <= n; i++) {
+    for (int i = 2; i <= *n; i++) {
         for (int j = 1; j < i; j++) {
             if (a[j] < a[i] && b[i] < b[j] + 1) {
                 c[i] = j;
@@ -65,15 +65,14 @@ void test_proccwssing(int n)
 {
     u32* a = create_a(n);
     proccessing(a, n);
-
-
 }
 
 u32 main() 
 {
-    u32* a = create_a(N);
+    int n = 5;
+    u32 * a = create_a(&n);
     printf("\n\n\n");
-    proccessing(a, N);
+    proccessing(a, &n);
     free(a);
     return 0;
 }
