@@ -55,10 +55,11 @@ void proccessing(u32* a, int *n)
         }
     }
    
-    while (index_max != 0){
-        printf("%d\n", a[index_max]);
+    printf("%d\n", a[index_max]);
+    do {
         index_max = c[index_max];
-    }
+        printf("%d\n", a[index_max]);
+    } while (index_max != 0);
 }
 
 void test_proccwssing(int n) 
