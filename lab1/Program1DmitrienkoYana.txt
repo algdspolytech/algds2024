@@ -1,0 +1,134 @@
+﻿// Program.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+//
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <locale.h>
+
+struct Data 
+{
+    int** adj;          // матрица связей
+    int* d;             // минимальное расстояние
+    int* v;             // посещенные вершины
+    int n;          // число вершин
+};
+
+struct Data* input()
+{
+    struct Data* data = (struct Data*)malloc(sizeof(struct Data));
+    printf("Введите размер поля n: ");
+    scanf("%d", &data->n);
+    int n = data->n;
+
+    data->d = (int*)malloc(sizeof(int) * data->n * data->n);
+    data->v = (int*)malloc(sizeof(int) * data->n * data->n);
+    data->adj = (int**)malloc(sizeof(int*) * data->n * data->n);
+    for (int i = 0; i < n * n; i++)
+        data->adj[i] = (int*)malloc(sizeof(int) * data->n * data->n);
+
+    printf("Поле ввода: \n");
+    int v = 1;
+    for (int r = 0; r < n; r++)
+    {
+        for (int k = 1; k <= n; k++)
+        {
+            printf("%d", n * n - (r + 1) * n + k);
+            if (k < n)
+                printf(" -> ");
+        }
+        printf("\n");
+        if (r < n - 1)
+        {
+            for (int k = 0; k < n; k++)
+                printf("^    ");
+            printf("\n");
+            for (int k = 0; k < n; k++)
+                printf("|    ");
+            printf("\n");
+        }
+    }
+    int val = 0;
+    printf("Введите все связи: \n");
+    printf("Связи на восток: \n");
+    for (int i = 0; i < n * n; i++)
+    {
+        if ((i + 1) % n == 0)
+            continue;
+        printf("%d->%d: ", i + 1, i + 2);
+        int w = rand() % 10;
+        printf("%d\n", w);
+        data->adj[i][i + 1] = w;
+    }
+
+    printf("Связи на север: \n");
+    for (int i = 0; i + n < n * n; i++)
+    {
+        printf("%d->%d: ", i + 1, i + 1 + n);
+        int w = rand() % 10;
+        printf("%d\n", w);
+        data->adj[i][i + n] = w;
+    }
+
+    /*cout << endl << "Список всех связей: " << endl;
+    for (int r = 0; r < n * n; r++)
+    {
+        for (int k = 0; k < n * n; k++)
+            cout << data->adj[r][k] << " ";
+        cout << endl;
+    }*/
+    return data;
+}
+
+int deikxtra(struct Data* data)
+{
+
+    int n = data->n * data->n;
+    //Инициализация вершин и расстояний
+    for (int i = 0; i < n; i++)
+    {
+        data->d[i] = 10000;
+        data->v[i] = 1;
+    }
+
+    data->d[0] = 0;
+    int minindex;
+    int min;
+    int temp = 0;
+
+    // Шаг алгоритма
+    do {
+        minindex = 10000;
+        min = 10000;
+        for (int i = 0; i < n; i++)
+        { // Если вершину ещё не обошли и вес меньше min
+            if ((data->v[i] == 1) && (data->d[i] < min))
+            { // Переприсваиваем значения
+                min = data->d[i];
+                minindex = i;
+            }
+        }
+        if (minindex != 10000)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                if (data->adj[minindex][i] > 0)
+                {
+                    temp = min + data->adj[minindex][i];
+                    if (temp < data->d[i])
+                        data->d[i] = temp;
+                }
+            }
+            data->v[minindex] = 0;
+        }
+    } while (minindex < 10000);
+    return data->d[n - 1];
+}
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    struct Data* result = input();
+    printf("Ответ: %d\n", deikxtra(result));
+    return 0;
+}
+
