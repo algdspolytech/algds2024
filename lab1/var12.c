@@ -53,54 +53,89 @@ int min_cost(char* X, char* Y, int d, int i, int c) {
     return result;
 }
 
+char* input_word() {
+    char buffer[81]; // Буфер для ввода
+    scanf("%80s", buffer); // Читаем слово, но не более 80 символов
+
+    // Выделяем память ровно под размер введенного слова
+    char* word = (char*)malloc((strlen(buffer) + 1) * sizeof(char));
+    strcpy(word, buffer); // Копируем слово из буфера в выделенную память
+
+    return word;
+}
+
+int read_int(const char* prompt) {
+    int value;
+    char ch;
+
+    while (1) {
+        printf("%s", prompt);
+        if (scanf("%d%c", &value, &ch) != 2 || ch != '\n') {
+            printf("Пожалуйста, введите число.\n");
+            while (getchar() != '\n'); // очистка буфера ввода
+        }
+        else {
+            break;
+        }
+    }
+
+    return value;
+}
+
 int main() {
-    system("chcp 1251");
+    //system("chcp 65001");
 
     int choice;
     char* X = NULL;
     char* Y = NULL;
     int d, i, e;
 
-    // Пример 1: "алгоритм" в "аллигатор"
-    X = _strdup("алгоритм");
-    Y = _strdup("аллигатор");
-    d = 2;
-    i = 3;
-    e = 1;
-    printf(" \"%s\" -> \"%s\": %d\n", X, Y, min_cost(X, Y, d, i, e));
+    // Ввод исходных данных
+    printf("Введите исходное слово X: ");
+    X = input_word();
+    printf("Введите новое слово Y: ");
+    Y = input_word();
+    d = read_int("Введите стоимость удаления: ");
+    i = read_int("Введите стоимость вставки: ");
+    e = read_int("Введите стоимость замены: ");
+    printf("Минимальная стоимость = %d\n", min_cost(X, Y, d, i, e));
 
-    // Пример 2: "аллигатор" в "коммутатор"
-    X = _strdup("аллигатор");
-    Y = _strdup("коммутатор");
-    printf(" \"%s\" -> \"%s\": %d\n", X, Y, min_cost(X, Y, d, i, e));
+    do {
+        printf("\n1. Заменить исходное слово X\n");
+        printf("2. Заменить новое слово Y\n");
+        printf("3. Изменить стоимости операций\n");
+        printf("4. Вычислить минимальную стоимость\n");
+        printf("0. Выход\n");
+        printf("Выберите действие: ");
+        scanf("%d", &choice);
 
-    // Пример 3: "коммутатор" в "оператор"
-    X = _strdup("коммутатор");
-    Y = _strdup("оператор");
-    printf(" \"%s\" -> \"%s\": %d\n", X, Y, min_cost(X, Y, d, i, e));
+        switch (choice) {
+        case 1:
+            printf("Введите исходное слово X: ");
+            if (X != NULL) free(X); // Освобождаем память, если X уже был введен
+            X = input_word();
+            printf("Минимальная стоимость = %d\n", min_cost(X, Y, d, i, e));
+            break;
+        case 2:
+            printf("Введите новое слово Y: ");
+            if (Y != NULL) free(Y); // Освобождаем память, если Y уже был введен
+            Y = input_word();
+            printf("Минимальная стоимость = %d\n", min_cost(X, Y, d, i, e));
+            break;
+        case 3:
+            d = read_int("Введите стоимость удаления: ");
+            i = read_int("Введите стоимость вставки: ");
+            e = read_int("Введите стоимость замены: ");
+        case 4:
+            printf("Минимальная стоимость = %d\n", min_cost(X, Y, d, i, e));
+        default:
+            choice = 0;
+        }
+    } while (choice != 0);
 
-    // Пример 4: "кот" в "котенок"
-    X = _strdup("кот");
-    Y = _strdup("котенок");
-    d = 2;
-    i = 1;
-    e = 2;
-    printf(" \"%s\" -> \"%s\": %d\n", X, Y, min_cost(X, Y, d, i, e));
+    // Освобождаем память
+    if (X != NULL) free(X);
+    if (Y != NULL) free(Y);
 
-    // Пример 5: "мама" в "папа"
-    X = _strdup("мама");
-    Y = _strdup("папа");
-    d = 2;
-    i = 2;
-    e = 1;
-    printf(" \"%s\" -> \"%s\": %d\n", X, Y, min_cost(X, Y, d, i, e));
-
-    // Пример 6: "дом" в "домик"
-    X = _strdup("дом");
-    Y = _strdup("домик");
-    d = 3;
-    i = 1;
-    e = 2;
-    printf(" \"%s\" -> \"%s\": %d\n", X, Y, min_cost(X, Y, d, i, e));
     return 0;
 }
