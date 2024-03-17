@@ -1,0 +1,3 @@
+﻿  Test.cpp
+D:\laba1\lab1\popitka2\FileName.c(18): warning C4715: check_sum: значение возвращается не при всех путях выполнения
+  popitka2.vcxproj -> D:\laba1\lab1\popitka2\x64\Debug\popitka2.exe
