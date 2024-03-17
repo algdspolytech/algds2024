@@ -67,3 +67,40 @@ d = 2
 i = 1
 e = 2
 print(X, "->", Y, min_cost(X, Y, d, i, e))  # Вывод: 4
+
+X = "kitten"
+Y = "sitting"
+d = 1
+i = 3
+e = 1
+print(X, "->", Y, min_cost(X, Y, d, i, e))
+
+X = "flaw"
+Y = "lawn"
+d = 1
+i = 3
+e = 1
+print(X, "->", Y, min_cost(X, Y, d, i, e))
+
+X = "kitten"
+Y = ""
+d = 1
+i = 2
+e = 1
+
+print(X, "->", Y, min_cost(X, Y, d, i, e))
+X = ""
+Y = "sitting"
+d = 1
+i = 2
+e = 1
+print(X, "->", Y, min_cost(X, Y, d, i, e))
+X = "cap"
+Y = "dad"
+d = 1
+i = 2
+e = 2
+print(X, "->", Y, min_cost(X, Y, d, i, e))
+
+   
+
