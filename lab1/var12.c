@@ -1,6 +1,3 @@
-//Реализуем код на C
-
-
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
@@ -8,7 +5,7 @@
 
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 
-int min_cost(char* X, char* Y, int d, int i, int e) {
+int min_cost(char* X, char* Y, int d, int i, int c) {
     int m = strlen(X);
     int n = strlen(Y);
 
@@ -41,7 +38,7 @@ int min_cost(char* X, char* Y, int d, int i, int e) {
             else {
                 dp[x][y] = MIN(MIN(dp[x][y - 1] + i,        // Вставка
                     dp[x - 1][y] + d),       // Удаление
-                    dp[x - 1][y - 1] + e);     // Замена
+                    dp[x - 1][y - 1] + c);     // Замена
             }
         }
     }
@@ -57,52 +54,53 @@ int min_cost(char* X, char* Y, int d, int i, int e) {
 }
 
 int main() {
-    //system("chcp 1251");
-    char X[100], Y[100];
+    system("chcp 1251");
+
+    int choice;
+    char* X = NULL;
+    char* Y = NULL;
     int d, i, e;
 
     // Пример 1: "алгоритм" в "аллигатор"
-    strcpy(X, "алгоритм");
-    strcpy(Y, "аллигатор");
+    X = _strdup("алгоритм");
+    Y = _strdup("аллигатор");
     d = 2;
     i = 3;
     e = 1;
     printf(" \"%s\" -> \"%s\": %d\n", X, Y, min_cost(X, Y, d, i, e));
 
     // Пример 2: "аллигатор" в "коммутатор"
-    strcpy(X, "аллигатор");
-    strcpy(Y, "коммутатор");
+    X = _strdup("аллигатор");
+    Y = _strdup("коммутатор");
     printf(" \"%s\" -> \"%s\": %d\n", X, Y, min_cost(X, Y, d, i, e));
 
     // Пример 3: "коммутатор" в "оператор"
-    strcpy(X, "коммутатор");
-    strcpy(Y, "оператор");
+    X = _strdup("коммутатор");
+    Y = _strdup("оператор");
     printf(" \"%s\" -> \"%s\": %d\n", X, Y, min_cost(X, Y, d, i, e));
 
     // Пример 4: "кот" в "котенок"
-    strcpy(X, "кот");
-    strcpy(Y, "котенок");
+    X = _strdup("кот");
+    Y = _strdup("котенок");
     d = 2;
     i = 1;
     e = 2;
     printf(" \"%s\" -> \"%s\": %d\n", X, Y, min_cost(X, Y, d, i, e));
 
     // Пример 5: "мама" в "папа"
-    strcpy(X, "мама");
-    strcpy(Y, "папа");
+    X = _strdup("мама");
+    Y = _strdup("папа");
     d = 2;
     i = 2;
     e = 1;
     printf(" \"%s\" -> \"%s\": %d\n", X, Y, min_cost(X, Y, d, i, e));
 
     // Пример 6: "дом" в "домик"
-    strcpy(X, "дом");
-    strcpy(Y, "домик");
+    X = _strdup("дом");
+    Y = _strdup("домик");
     d = 3;
     i = 1;
     e = 2;
     printf(" \"%s\" -> \"%s\": %d\n", X, Y, min_cost(X, Y, d, i, e));
-
-
     return 0;
 }
