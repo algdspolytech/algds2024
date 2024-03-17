@@ -1,0 +1,7 @@
+#folders
+build/
+lab1/googletest
+
+#extensions
+*.exe
+*.txt
