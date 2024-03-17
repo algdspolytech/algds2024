@@ -1,0 +1,8 @@
+**/Debug
+**/Release
+**/.vs
+**/*vcxproj.user
+**/*vcxproj.filters
+**/*vcxproj
+**/pch.h
+**/pch.cpp
