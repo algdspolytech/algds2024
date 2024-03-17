@@ -19,8 +19,8 @@ double get_distance(struct Point a, struct Point b) {
 }
 
 unsigned array_min_index(double *v, unsigned size) {
-    double min = 10000;
-    unsigned min_index = 0;
+    double min = INT_MAX;
+    unsigned min_index = UINT_MAX;
     for (unsigned index = 0; index < size; index++) {
         if (v[index] < min) {
             min = v[index];
@@ -31,13 +31,31 @@ unsigned array_min_index(double *v, unsigned size) {
 }
 
 double get_max(double *array, unsigned n) {
-    double max = -10000;
+    double max = INT_MIN;
     for (unsigned index = 0; index < n; index++) {
         if (array[index] > max) {
             max = array[index];
         }
     }
     return max;
+}
+
+void fill_distance_array(unsigned int n, const struct Point *array, double *distance) {
+    double *local_distance = malloc((sizeof(double)) * (n - 3));
+
+    unsigned local_index = 0;
+    for (unsigned i = 0; i < n; i++) {
+        for (unsigned j = 0; j < n; j++) {
+            if ((i == j) || ((j + 1) % n == i) || ((j - 1) % n == i) ||
+                ((i + 1) % n == j) || ((i - 1) % n == j))
+                continue;
+            local_distance[local_index] = get_distance(array[i], array[j]);
+            local_index++;
+        }
+        distance[i] = get_max(local_distance, n - 3);
+        local_index = 0;
+    }
+    free(local_distance);
 }
 
 struct Point *initPoints(unsigned *n) {
