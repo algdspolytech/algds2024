@@ -1,0 +1,8 @@
+#folders
+build/
+lab1/googletest
+.vscode/
+
+#extensions
+.exe
+.txt
