@@ -1,7 +1,7 @@
 #include "levenshtein.h"
 #include <stdio.h>
 #include <stdlib.h>
-//#include <wchar.h>
+#include <wchar.h>
 #include <locale.h>
 
 int minimum(int a, int b, int c) {
@@ -12,7 +12,7 @@ int minimum(int a, int b, int c) {
 
 
 int levenshteinDistance(wchar_t* x, int m, wchar_t* y, int n) {
-    // Динамическое выделение памяти для двумерного массива
+    // Г„ГЁГ­Г Г¬ГЁГ·ГҐГ±ГЄГ®ГҐ ГўГ»Г¤ГҐГ«ГҐГ­ГЁГҐ ГЇГ Г¬ГїГІГЁ Г¤Г«Гї Г¤ГўГіГ¬ГҐГ°Г­Г®ГЈГ® Г¬Г Г±Г±ГЁГўГ 
     int** dp = (int**)malloc((m + 1) * sizeof(int*));
     for (int i = 0; i <= m; i++) {
         dp[i] = (int*)malloc((n + 1) * sizeof(int));
@@ -42,13 +42,13 @@ int levenshteinDistance(wchar_t* x, int m, wchar_t* y, int n) {
 int main() {
     setlocale(LC_CTYPE, "");
 
-    wchar_t x[] = L"рtslddf";
+    wchar_t x[] = L"Г°tslddf";
     int m = wcslen(x);
     wchar_t y[] = L"tsgldds";
     int n = wcslen(y);
 
     int result = levenshteinDistance(x, m, y, n);
-    wprintf(L"Расстояние Левенштейна между строками x и y: %d\n", result);
+    wprintf(L"ГђГ Г±Г±ГІГ®ГїГ­ГЁГҐ Г‹ГҐГўГҐГ­ГёГІГҐГ©Г­Г  Г¬ГҐГ¦Г¤Гі Г±ГІГ°Г®ГЄГ Г¬ГЁ x ГЁ y: %d\n", result);
 
     return 0;
 }
