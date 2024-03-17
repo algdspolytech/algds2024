@@ -1,0 +1,89 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "gtest/gtest.h"
+
+// Функция для вычисления минимальной стоимости преобразования строки X в строку Y
+int minCostTransform(int d, int i, int e, const char* X, const char* Y) {
+    int m = strlen(X);
+    int n = strlen(Y);
+
+    // Создаем матрицу для хранения стоимостей преобразования
+    int** costMatrix = (int**)malloc((m + 1) * sizeof(int*));
+    for (int j = 0; j <= m; ++j) {
+        costMatrix[j] = (int*)malloc((n + 1) * sizeof(int));
+    }
+
+    // Заполняем базовые случаи
+    for (int j = 0; j <= n; ++j) {
+        costMatrix[0][j] = j * i;
+    }
+    for (int i = 0; i <= m; ++i) {
+        costMatrix[i][0] = i * d;
+    }
+
+    // Заполняем остальные случаи
+    for (int i = 1; i <= m; ++i) {
+        for (int j = 1; j <= n; ++j) {
+            if (X[i - 1] == Y[j - 1]) {
+                costMatrix[i][j] = costMatrix[i - 1][j - 1];
+            } else {
+                costMatrix[i][j] = costMatrix[i - 1][j - 1] + e;
+            }
+            costMatrix[i][j] = fmin(costMatrix[i][j], fmin(costMatrix[i - 1][j] + d, costMatrix[i][j - 1] + i));
+        }
+    }
+
+    int minCost = costMatrix[m][n];
+
+    // Освобождаем память
+    for (int j = 0; j <= m; ++j) {
+        free(costMatrix[j]);
+    }
+    free(costMatrix);
+
+    return minCost;
+}
+
+// Функция для ввода данных
+void inputData(int* d, int* i, int* e, char** X, char** Y) {
+    printf("Введите три неотрицательных числа d, i, e через пробел: ");
+    scanf("%d %d %d", d, i, e);
+
+    printf("Введите строку X: ");
+    char buffer[100]; // предположим максимальная длина строки 100
+    scanf("%s", buffer);
+    *X = strdup(buffer);
+
+    printf("Введите строку Y: ");
+    scanf("%s", buffer);
+    *Y = strdup(buffer);
+}
+
+// Функция для вывода результата
+void outputResult(int minCost) {
+    printf("Минимальная стоимость преобразования: %d\n", minCost);
+}
+
+// Тесты для проверки функции minCostTransform
+TEST(MinCostTransformTest, BasicTests) {
+    // Тест 1: Пустые строки
+    EXPECT_EQ(minCostTransform(1, 1, 1, "", ""), 0);
+
+    // Тест 2: Строки с одинаковым содержимым
+    EXPECT_EQ(minCostTransform(1, 1, 1, "abc", "abc"), 0);
+
+    // Тест 3: Строки с различающимися символами
+    EXPECT_EQ(minCostTransform(1, 1, 1, "abc", "def"), 3);
+
+    // Тест 4: Строки с различающимися символами и разной длиной
+    EXPECT_EQ(minCostTransform(1, 1, 1, "abc", "abcd"), 1);
+
+    // Тест 5: Строки с различающимися символами и разной длиной
+    EXPECT_EQ(minCostTransform(2, 3, 4, "kitten", "sitting"), 12);
+}
+
+int main(int argc, char** argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
