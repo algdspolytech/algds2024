@@ -1,7 +1,8 @@
 #include "levenshtein.h"
 #include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
-// Тестирование функции minimum
+// Г’ГҐГ±ГІГЁГ°Г®ГўГ Г­ГЁГҐ ГґГіГ­ГЄГ¶ГЁГЁ minimum
 TEST(MinimumFunction, EqualValues) {
     EXPECT_EQ(5, minimum(5, 5, 5));
 }
@@ -18,7 +19,7 @@ TEST(MinimumFunction, ThirdValueLeast) {
     EXPECT_EQ(4, minimum(6, 5, 4));
 }
 
-// Тестирование функции levenshteinDistance
+// Г’ГҐГ±ГІГЁГ°Г®ГўГ Г­ГЁГҐ ГґГіГ­ГЄГ¶ГЁГЁ levenshteinDistance
 TEST(LevenshteinDistanceFunction, EmptyStrings) {
     wchar_t x[] = L"";
     wchar_t y[] = L"";
@@ -51,7 +52,7 @@ TEST(LevenshteinDistanceFunction, DifferentStrings) {
     EXPECT_EQ(3, levenshteinDistance(x, m, y, n));
 }
 
-// Точка входа для Google test
+// Г’Г®Г·ГЄГ  ГўГµГ®Г¤Г  Г¤Г«Гї Google test
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
