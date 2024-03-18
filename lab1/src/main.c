@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
+#include "main.h"
 
 int max(int a, int b, int c) {
     if (a > b && a > c) return a;

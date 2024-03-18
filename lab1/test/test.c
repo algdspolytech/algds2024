@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "your_file.h" // Замените на имя вашего файла с функцией maxCost
+#include "main.h" 
 
 TEST(MaxCostTest, TestEmptyBoard) {
     int N = 0;
