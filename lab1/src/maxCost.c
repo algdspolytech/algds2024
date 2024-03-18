@@ -10,6 +10,10 @@ int _max(int a, int b, int c) {
 }
 
 int maxCost(int **cost, int N) {
+    if (N == 0) {
+        printf("Размер доски равен нулю\n");
+        return 0;
+    }
     int **dp = (int **) malloc(N * sizeof(int *));
     if (dp == NULL) {
         printf("Ошибка выделения памяти\n");

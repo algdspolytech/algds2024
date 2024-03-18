@@ -4,7 +4,7 @@
 TEST(MaxCostTest, TestEmptyBoard) {
     int N = 0;
     int** cost = (int**)malloc(N * sizeof(int*));
-    EXPECT_EQ(maxCost(cost, N), -1);
+    EXPECT_EQ(maxCost(cost, N), 0);
     free(cost);
 }
 
