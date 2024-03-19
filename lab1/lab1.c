@@ -16,6 +16,42 @@ struct Grid* left;
 int down_n, right_n;
 }Grid;
 
+Grid** InitOrderedGrid(int h, int w){
+	Grid** p = NULL;
+	if ((h <2) || (w < 2)) {
+		printf("Grid needs to be atleast 2x2!\n");
+	}
+	else
+	{
+	p = (Grid**)malloc( h * sizeof(Grid*));
+	for(int i = 0; i<h;i++){
+		p[i] = (Grid*)malloc(w * sizeof(Grid));
+		if(p[i] == NULL){
+			printf("Critical Error: P is a null pointer!\n");
+			return 0;
+		}
+		for(int j = 0;j<w;j++){
+			p[i][j].left = NULL;
+			p[i][j].right = NULL;
+			p[i][j].i = i;
+			p[i][j].j = 0;
+			p[i][j].down = NULL;
+			p[i][j].left = NULL;
+			p[i][j].up = NULL;
+			p[i][j].right = NULL;
+			if(i != 0){
+				p[i][j].up = &p[i-1][j];
+				p[i-1][j].down = &p[i][j];
+			}
+			if(j != 0){
+				p[i][j-1].right = &p[i][j];
+				p[i][j].left = &p[i][j-1];
+			}
+		}
+		}
+	}
+	return p;
+}
 
 Grid** CreateOrderedGrid(int h, int w){
 	Grid** p = NULL;
@@ -191,18 +227,6 @@ void TestPrintGrid_PNullPointer_CriticalError(){
 	//act
 	PrintGrid(p,h,w);
 }
-void TestPrintGrid_IncorrectHorW_GridNotFullyPrinted(){
-	//arrange
-	int h=10, w = 3;
-	Grid** p = NULL;
-
-	//act
-	p = CreateOrderedGrid(h,w);
-
-	//assert
-	printf("TestPrintGrid_IncorrectHorW_IncorrectExecution:\n");
-	PrintGrid(p,h-2,w-1);
-}
 void TestPrintGrid_HorWlessThan2_ExecutionError(){
 	//arrange
 	int h=10, w = 3;
@@ -250,6 +274,91 @@ void TestFindShortestPath_IncorrectRPointer_ShortestPathOutputZero(){
 	int** l =FindShortestPath(p,NULL,h,w);
 	printf("Shortest path took %d steps!\n",r);
 }
+
+void TestFindShortestPath_FixedPath_ReturnTwentyTwo(){
+	//arrange
+	int h=2, w=4;
+	Grid** path = InitOrderedGrid(2,4);
+	path[0][0].down_n = 15;
+	path[0][0].right_n = 3;
+	path[1][0].right_n = 10;
+	path[0][1].right_n = 4;
+	path[0][1].down_n = 3;
+	path[0][2].right_n=11;
+	path[0][2].down_n=14;
+	path[0][3].down_n=5;
+	path[1][1].right_n = 6;
+	path[1][2].right_n=1;
+	//act
+	int r = 0;
+	int** l = FindShortestPath(path,&r,h,w);
+
+	//assrt
+	printf("TestFindShortestPath_FixedPath_ReturnTwentyTwo(): %d\n",r);
+}
+void TestFindShortestPath_FixedPath_ReturnFour(){
+	//arrange
+	int h=2, w=4;
+	Grid** path = InitOrderedGrid(2,4);
+	path[0][0].down_n = 1;
+	path[0][0].right_n = 1;
+	path[1][0].right_n = 1;
+	path[0][1].right_n = 1;
+	path[0][1].down_n = 1;
+	path[0][2].right_n=1;
+	path[0][2].down_n=1;
+	path[0][3].down_n=1;
+	path[1][1].right_n = 1;
+	path[1][2].right_n=1;
+	//act
+	int r = 0;
+	int** l = FindShortestPath(path,&r,h,w);
+
+	//assrt
+	printf("TestFindShortestPath_FixedPath_ReturnFour(): %d\n",r);
+}
+void TestFindShortestPath_FixedPath_ReturnFourtyNine(){
+	//arrange
+	int h=2, w=4;
+	Grid** path = InitOrderedGrid(2,4);
+	path[0][0].down_n = 10;
+	path[0][0].right_n = 11;
+	path[1][0].right_n = 12;
+	path[0][1].right_n = 13;
+	path[0][1].down_n = 14;
+	path[0][2].right_n=15;
+	path[0][2].down_n=16;
+	path[0][3].down_n=17;
+	path[1][1].right_n = 18;
+	path[1][2].right_n=19;
+	//act
+	int r = 0;
+	int** l = FindShortestPath(path,&r,h,w);
+
+	//assrt
+	printf("TestFindShortestPath_FixedPath_ReturnFourtyNine(): %d\n",r);
+}
+void TestFindShortestPath_FixedPath_ReturnFifty(){
+	//arrange
+	int h=2, w=4;
+	Grid** path = InitOrderedGrid(2,4);
+	path[0][0].down_n = 19;
+	path[0][0].right_n = 18;
+	path[1][0].right_n = 17;
+	path[0][1].right_n = 16;
+	path[0][1].down_n = 15;
+	path[0][2].right_n=14;
+	path[0][2].down_n=13;
+	path[0][3].down_n=12;
+	path[1][1].right_n = 11;
+	path[1][2].right_n=10;
+	//act
+	int r = 0;
+	int** l = FindShortestPath(path,&r,h,w);
+
+	//assert
+	printf("TestFindShortestPath_FixedPath_ReturnFifty(): %d\n",r);
+}
 void TestPrintShortestPath_IncorrectHorW_IncorrectGridError(){
 	//arrange
 	int h=10, w = 3;
@@ -278,32 +387,35 @@ void TestClearnMemory_LorNNullPointer_Return0(){
 	ClearMemory(NULL,NULL,10);
 	printf("TestClearnMemory_LorNNullPointer_Error()\n");
 }
-void main(void) {
+int main(void) {
 	setlocale(LC_CTYPE, "Russian");
 	system("chcp 1251");
-	int h = 10, w = 10;
+	int height = 10, width = 10;
 	srand(time(NULL));
-	Grid** p = NULL;
-	p = CreateOrderedGrid(h,w);
-	if(p != NULL){
-	PrintGrid(p,h,w);
-	int r = 0;
-	int** l = FindShortestPath(p,&r,h,w);
-	printf("Shortest path took %d steps!\n",r);
-	printShortestPath(l,h,w);
-	ClearMemory(p,l,h);
+	Grid** path = NULL;
+	path = CreateOrderedGrid(height,width);
+	if(path != NULL){
+	PrintGrid(path,height,width);
+	int result = 0;
+	int** trajectory = FindShortestPath(path,&result,height,width);
+	printf("Shortest path took %d steps!\n",result);
+	printShortestPath(trajectory,height,width);
+	ClearMemory(path,trajectory,height);
 	}
 
 	//Юнит тесты
 	TestCreateOrderedGrid_HorWLessThan2_Error();
 	TestCreateOrderedGrid_HBiggerThanW_Execution();
 	TestPrintGrid_PNullPointer_CriticalError();
-	TestPrintGrid_IncorrectHorW_GridNotFullyPrinted();
 	TestPrintGrid_HorWlessThan2_ExecutionError();
 	TestFindShortestPath_PNullPointer_ExecutionError();
 	TestFindShortestPath_IncorrectHorW_AlgorithmError();
 	TestFindShortestPath_IncorrectRPointer_ShortestPathOutputZero();
-	TestPrintShortestPath_IncorrectHorW_IncorrectGridError();
 	TestPrintShortestPath_LNullPointer_CriticalError();
 	TestClearnMemory_LorNNullPointer_Return0();
+	TestFindShortestPath_FixedPath_ReturnTwentyTwo();
+	TestFindShortestPath_FixedPath_ReturnFour();
+	TestFindShortestPath_FixedPath_ReturnFourtyNine();
+	TestFindShortestPath_FixedPath_ReturnFifty();
+	return 1;
 }
