@@ -9,7 +9,7 @@ int main() {
     int length_of_subsequence;
     int *max_increasing_subsequence = find_max_increasing_subsequence(sequence, sequence_length, &length_of_subsequence);
 
-    printf("Максимальная возрастающая подпоследовательность: ");
+    printf("Максимальная возрастающая подпоследовательность:  ");
     for (int i =   0; i < length_of_subsequence ; i++)
         printf("%d ", max_increasing_subsequence[i]);
     printf("\n");

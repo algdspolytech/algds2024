@@ -1,6 +1,7 @@
 #include "../find_max_incresing_subsequence.h"
 #include <gtest/gtest.h>
 #include <vector>
+using namespace std;
 // Тестирование функции find_max_increasing_subsequence
 TEST(FindMaxIncreasingSubsequenceTest, Example1) {
     int sequence[] = {3, 10, 2, 1, 20};
@@ -8,7 +9,7 @@ TEST(FindMaxIncreasingSubsequenceTest, Example1) {
     int length_of_subsequence;
     int *subsequence = find_max_increasing_subsequence(sequence, sequence_length, &length_of_subsequence);
     ASSERT_NE(subsequence, nullptr); // Проверка на нулевой указатель
-    std::vector<int> result_subsequence = {3, 10, 20};
+    vector<int> result_subsequence = {3, 10, 20};
     EXPECT_EQ(length_of_subsequence, result_subsequence.size());
     for (int i = 0; i < length_of_subsequence; ++i) {
         EXPECT_EQ(subsequence[i], result_subsequence[i]);
@@ -22,7 +23,7 @@ TEST(FindMaxIncreasingSubsequenceTest, Example2) {
     int length_of_subsequence;
     int *subsequence = find_max_increasing_subsequence(sequence, sequence_length, &length_of_subsequence);
     ASSERT_NE(subsequence, nullptr);
-    std::vector<int> result_subsequence = {10, 22, 33, 41, 60, 80};
+    vector<int> result_subsequence = {10, 22, 33, 41, 60, 80};
     EXPECT_EQ(length_of_subsequence, result_subsequence.size());
     for (int i = 0; i < length_of_subsequence; ++i) {
         EXPECT_EQ(subsequence[i], result_subsequence[i]);
@@ -36,7 +37,7 @@ TEST(FindMaxIncreasingSubsequenceTest, Example3) {
     int length_of_subsequence;
     int *subsequence = find_max_increasing_subsequence(sequence, sequence_length, &length_of_subsequence);
     ASSERT_NE(subsequence, nullptr);
-    std::vector<int> result_subsequence = {3, 7, 40, 80};
+    vector<int> result_subsequence = {3, 7, 40, 80};
     EXPECT_EQ(length_of_subsequence, result_subsequence.size());
     for (int i = 0; i < length_of_subsequence; ++i) {
         EXPECT_EQ(subsequence[i], result_subsequence[i]);
