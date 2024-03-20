@@ -5,22 +5,17 @@
 #define GREEN "\033[1;32m"
 #define RED "\033[1;31m"
 
-int sequence(char *filename){
-    FILE *file = fopen(filename, "r");
-    if (file == NULL){
-        printf("File not found\n");
-        return -1;
+int calculate_sequence(int *sequence, int size) {
+    if (size == 0){
+        printf("Sequence is empty\n");
+        return -2;
     }
     int max = 0;
     int n = 1;
-    int k = 0;
-    int l = 0;
-
-    if (fscanf(file, "%d", &l) == EOF){
-        printf("File is empty\n");
-        return -2;
-    }
-    while(fscanf(file, "%d", &k) != EOF){
+    int l = sequence[0];
+    int k;
+    for (int i = 1; i < size; i++) {
+        k = sequence[i];
         if (k % l == 0){
             l = k;
             n++;
@@ -35,21 +30,42 @@ int sequence(char *filename){
     return max;
 }
 
-void test_sequence(char *filename, int expected_result) {
-    int result = sequence(filename);
-    if (result == expected_result) {
-        printf(GREEN "Test passed" RESET " for file %s\n" , filename);
-    } else {
-        printf(RED "Test failed" RESET " for file %s: expected %d, got %d\n" , filename, expected_result, result);
-    }
+int test_sequence1() {
+    int sequence[] = {3, 5, 14, 3, 14, 3, 14, 2, 7, 2, 4, 7, 6, 12, 24, 48, 12, 2, 4, 1, 1, 1};
+    int size = sizeof(sequence) / sizeof(sequence[0]);
+    int wait_result = 4;
+    int result = calculate_sequence(sequence, size);
+    return result == wait_result;
+}
+
+int test_sequence2() {
+    int sequence[] = {3, 5, 14, 3, 14, 3, 14, 2, 7, 2, 4, 7, 6, 12, 24};
+    int size = sizeof(sequence) / sizeof(sequence[0]);
+    int wait_result = 3;
+    int result = calculate_sequence(sequence, size);
+    return result == wait_result;
+}
+
+int test_sequence3() {
+    int sequence[] = {6, 12, 24, 48, 12, 2, 4, 1, 1, 1, 3, 5, 14, 3, 14, 3, 14, 2, 7, 2, 4, 7};
+    int size = sizeof(sequence) / sizeof(sequence[0]);
+    int wait_result = 4;
+    int result = calculate_sequence(sequence, size);
+    return result == wait_result;
 }
 
 int main() {
-    test_sequence("tests/test1.txt", 4);
-    test_sequence("tests/test2.txt", 3);
-    test_sequence("tests/test3.txt", 4);
-    test_sequence("tests/empty.txt", -2);
-    test_sequence("tests/nonexistent.txt", -1);
-
-    return 0;
+    int test_results[3];
+    test_results[0] = test_sequence1();
+    test_results[1] = test_sequence2();
+    test_results[2] = test_sequence3();
+    for (int i = 0; i < 3; i++){
+        if (test_results[i]){
+            printf(GREEN "Test %d passed\n" RESET, i+1);
+        }
+        else{
+            printf(RED "Test %d failed\n" RESET, i+1);
+        }
+    }
+    return 0; 
 }
