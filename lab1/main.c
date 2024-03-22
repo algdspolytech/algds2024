@@ -3,25 +3,31 @@
 #include "main.h"
 
 int main(void) {
-    int N;
-    printf("Enter num of points: ");
+    int N, A;
+    printf("Enter num of elements: ");
     scanf("%d", &N);
-    Point *arr = (Point *) calloc(N, sizeof(Point));
+    printf("Enter max weight: ");
+    scanf("%d", &A);
+    int *weights = (int *) calloc(N, sizeof(int));
+    int *values = (int *) calloc(N, sizeof(int));
+
+    printf("Enter weight elements:\n");
     for (int j = 0; j < N; j++) {
-        printf("Enter point: ");
-        scanf("%f %f", &arr[j].x, &arr[j].y);
-    }
-
-    int pos_point = 0;
-
-    Result(&pos_point, arr, N);
-
-    printf("User: Point(%.2f, %.2f) - main point!\n", arr[pos_point].x, arr[pos_point].y);
-    for (int j = 0; j < N; j++) {
-        if (Check(pos_point, j, N)) {
-            printf("Create diag with coordinates: (%.2f, %.2f), (%.2f, %.2f)\n", arr[pos_point].x, arr[pos_point].y,
-                   arr[j].x, arr[j].y);
+        printf("Weight: ");
+        scanf("%d", &weights[j]);
+        if (weights[j] > N) {
+            printf("Error!");
+            exit(1);
         }
     }
-    return (0);
+    printf("Enter cost elements:\n");
+    for (int j = 0; j < N; j++) {
+        printf("Cost: ");
+        scanf("%d", &values[j]);
+    }
+
+    int result = Result(N, A, weights, values);
+    printf("Max sum cost elements: %d\n", result);
+
+    return 0;
 }
