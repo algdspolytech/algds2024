@@ -1,48 +1,47 @@
-#include "math.h"
-#include <limits.h>
+#pragma once
 
-typedef struct {
-    float x;
-    float y;
-} Point;
-
-float Distance(Point n1, Point n2) {
-    float result = sqrt((n1.x - n2.x) * (n1.x - n2.x) + (n1.y - n2.y) * (n1.y - n2.y));
-    return (result);
-}
-
-int Check(int i, int j, int N) {
-    if (i == j) {
-        return (0);
-    } else if (i == j - 1) {
-        return (0);
-    } else if (i == j + 1) {
-        return (0);
-    } else if (j == 0 && i == N - 1) {
-        return (0);
-    } else if (j == N - 1 && i == 0) {
-        return (0);
+int max(int a, int b) {
+    if (a > b) {
+        return (a);
+    } else {
+        return (b);
     }
-
-    return (1);
 }
 
-void Result(int *pos_point, Point arr[], int N) {
-    float min = INT_MAX;
-    for (int j = 0; j < N; j++) {
-        float max = 0;
-        for (int i = 0; i < N; i++) {
-            if (Check(i, j, N)) {
-                float num = Distance(arr[j], arr[i]);
-                if (num > max) {
-                    max = num;
-                }
+int Result(int N, int A, int weights[], int values[]) {
+    int F[N + 1][A + 1];
+
+    for (int i = 0; i <= N; i++) {
+        for (int j = 0; j <= A; j++) {
+            F[i][j] = 0;
+        }
+    }
+    for (int i = 1; i <= N; i++) {
+        for (int y = 1; y <= A; y++) {
+            if (weights[i - 1] <= y) {
+                F[i][y] = max(F[i - 1][y], values[i - 1] + F[i - 1][y - weights[i - 1]]);
+            } else {
+                F[i][y] = F[i - 1][y];
             }
         }
-
-        if (max < min) {
-            min = max;
-            *pos_point = j;
+    }
+    // Check included elements
+    int included[N + A];
+    int i = N, y = A;
+    while (i > 0 && y > 0) {
+        if (F[i][y] != F[i - 1][y]) {
+            included[i - 1] = 1;
+            y -= weights[i - 1];
+        } else {
+            included[i - 1] = 0;
+        }
+        i--;
+    }
+    printf("Arr included elements:\n");
+    for (int j = 0; j < N; j++) {
+        if (included[j]) {
+            printf("Element %d (weight %d, cost %d)\n", j + 1, weights[j], values[j]);
         }
     }
+    return F[N][A];
 }
