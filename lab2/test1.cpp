@@ -6,6 +6,9 @@ class TreapTest : public ::testing::Test {
 protected:
     
 };
+extern "C" {
+    #include "treap.h" 
+}
 
 // Тест на создание узла и проверку присвоения ключа
 TEST_F(TreapTest, CreateNodeAssignsKeyCorrectly) {
