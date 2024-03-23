@@ -1,5 +1,4 @@
 #include <limits.h>
-#include "treap.h"
 #include "gtest/gtest.h"
 
 class TreapTest : public ::testing::Test {
