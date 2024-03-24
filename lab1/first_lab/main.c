@@ -42,7 +42,7 @@ list_s* readfile(char const* filename) {
 
 
 
-list_s* function(int const* list, int const n) {
+list_s* max_sequence_function(int const* list, int const n) {
 
 	list_s* result = (list_s*)malloc(sizeof(list_s));
 
@@ -90,14 +90,20 @@ void readfileTest() {
 	list_s* test1t = readfile("test1.txt");
 	if (test1->N != test1t->N) {
 		printf("readfileTest test1 Error");
+		free(test1);
+		free(list1);
 		exit(1);
 	}
 	for (int i = 0; i < 3; i++) {
 		if (test1->seq[i] != test1t->seq[i]) {
 			printf("readfileTest test1 Error");
+			free(test1);
+			free(list1);
 			exit(1);
 		}
 	}
+	free(test1);
+	free(list1);
 
 	list_s* test2 = (list_s*)malloc(sizeof(list_s));
 	test2->N = 4;
@@ -110,14 +116,20 @@ void readfileTest() {
 	list_s* test2t = readfile("test2.txt");
 	if (test2->N != test2t->N) {
 		printf("readfileTest test2 Error");
+		free(test2);
+		free(list2);
 		exit(1);
 	}
 	for (int i = 0; i < 4; i++) {
 		if (test2->seq[i] != test2t->seq[i]) {
 			printf("readfileTest test2 Error");
+			free(test2);
+			free(list2);
 			exit(1);
 		}
 	}
+	free(test2);
+	free(list2);
 
 
 	list_s* test3 = (list_s*)malloc(sizeof(list_s));
@@ -128,28 +140,54 @@ void readfileTest() {
 	list_s* test3t = readfile("test3.txt");
 	if (test3->N != test3t->N) {
 		printf("readfileTest test3 Error");
+		free(test3);
+		free(list3);
 		exit(1);
 	}
 	for (int i = 0; i < 1; i++) {
 		if (test3->seq[i] != test3t->seq[i]) {
 			printf("readfileTest test3 Error");
+			free(test3);
+			free(list3);
 			exit(1);
 		}
 	}
 
 	printf("readfileTest OK\n");
+	free(test3);
+	free(list3);
 }
 
-void functionTest() {
+void max_sequence_functionTest() {
 
 	int* list1 = (int*)malloc(10 * sizeof(int));
-	int* list2 = (int*)malloc(8 * sizeof(int));
-	int* list3 = (int*)malloc(7 * sizeof(int));
 
 	for (int i = 0; i < 10; i++) {
 		list1[i] = 5;
 	}
 
+
+	list_s* test1 = max_sequence_function(list1, 10);
+
+	if (test1->N != 10) {
+		printf("max_sequence_functionTest test 1 Error");
+		free(list1);
+		free(test1);
+		exit(1);
+	}
+
+	for (int i = 0; i < 10; i++) {
+		if (test1->seq[i] != list1[i]) {
+			printf("max_sequence_functionTest test 1 Error");
+			free(list1);
+			free(test1);
+			exit(1);
+		}
+	}
+	free(list1);
+	free(test1);
+
+	int* list2 = (int*)malloc(8 * sizeof(int));
 	list2[0] = 2;
 	list2[1] = 4;
 	list2[2] = 4;
@@ -158,7 +196,30 @@ void functionTest() {
 	list2[5] = 13;
 	list2[6] = 26;
 	list2[7] = 26;
+	list_s* test2 = max_sequence_function(list2, 8);
 
+
+	if (test2->N != 5) {
+		printf("max_sequence_functionTest test 2 Error");
+		free(list2);
+		free(test2);
+		exit(1);
+	}
+
+	for (int i = 0; i < 5; i++) {
+		if (test2->seq[i] != list2[i]) {
+			printf("max_sequence_functionTest test 2 Error");
+			free(list2);
+			free(test2);
+			exit(1);
+		}
+	}
+
+	free(list2);
+	free(test2);
+
+
+	int* list3 = (int*)malloc(7 * sizeof(int));
 	list3[0] = 1;
 	list3[1] = 2;
 	list3[2] = 4;
@@ -166,54 +227,35 @@ void functionTest() {
 	list3[4] = 10;
 	list3[5] = 30;
 	list3[6] = 60;
+	list_s* test3 = max_sequence_function(list3, 7);
 
-	list_s* test1 = function(list1, 10);
-	list_s* test2 = function(list2, 8);
-	list_s* test3 = function(list3, 7);
-
-	if (test1->N != 10) {
-		printf("functionTest test 1 Error");
-		exit(1);
-	}
-	if (test2->N != 5) {
-		printf("functionTest test 2 Error");
-		exit(1);
-	}
-	if (test3->N != 4) {
-		printf("functionTest test 3 Error");
-		exit(1);
-	}
-
-	for (int i = 0; i < 10; i++) {
-		if (test1->seq[i] != list1[i]) {
-			printf("functionTest test 1 Error");
-			exit(1);
-		}
-	}
-	for (int i = 0; i < 5; i++) {
-		if (test2->seq[i] != list2[i]) {
-			printf("functionTest test 2 Error");
-			exit(1);
-		}
-	}
 	for (int i = 0; i < 4; i++) {
 		if (test3->seq[i] != list3[i+3]) {
-			printf("functionTest test 3 Error");
+			printf("max_sequence_functionTest test 3 Error");
+			free(list3);
+			free(test3);
 			exit(1);
 		}
 	}
-	printf("functionTest OK\n");
+
+	if (test3->N != 4) {
+		printf("max_sequence_functionTest test 3 Error");
+		free(list3);
+		free(test3);
+		exit(1);
+	}
+	printf("max_sequence_functionTest OK\n");
 }
 
 
 int main() {
 
 	readfileTest();
-	functionTest();
+	max_sequence_functionTest();
 
 	list_s* list = readfile("input.txt");
 
-	list_s* result = function(list->seq, list->N);
+	list_s* result = max_sequence_function(list->seq, list->N);
 
 	for (int i = 0; i < result->N; i++) {
 		printf("%d ", result->seq[i]);
