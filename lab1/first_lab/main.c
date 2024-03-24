@@ -261,5 +261,8 @@ int main() {
 		printf("%d ", result->seq[i]);
 	}
 
+	free(list);
+	free(result);
+
 	return 0;
 }
